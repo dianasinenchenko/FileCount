@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +17,7 @@ namespace FileCount
         public MainWindow()
         {
             InitializeComponent();
-            fileExtensionComboBox.SelectedIndexChanged += fileExtensionComboBox_SelectedIndexChanged;
+           
         }
 
         private void fileExtensionComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -39,9 +40,7 @@ namespace FileCount
             fileExtensionComboBox.Items.Add("pdf");
             fileExtensionComboBox.Items.Add("zip");
             fileExtensionComboBox.Items.Add("rar");
-            fileExtensionComboBox.Items.Add("jpg");
-            fileExtensionComboBox.Items.Add("*");
-          
+            fileExtensionComboBox.Items.Add("jpg");        
         }
 
         public void ChooseFolder()
@@ -51,23 +50,57 @@ namespace FileCount
                 filePathRichTextBox.Text = folderBrowserDialog1.SelectedPath;
             }
         }
+        
+
+        static string[] SearchDirectory(string patch)
+        {
+            string[] ResultSearch = Directory.GetDirectories(patch);           
+            return ResultSearch;            
+        }
+
+
+        static string[] SearchFile(string patch, string pattern)
+        {
+            string[] ResultSearch = Directory.GetFiles(patch, pattern, SearchOption.AllDirectories);           
+            return ResultSearch;
+        }
+
 
         private void findFileButton_Click(object sender, EventArgs e)
-        {
+        {                 
+            string PatchProfile = filePathRichTextBox.Text.ToString();
+            string[] S = SearchDirectory(PatchProfile);
             
-                string[] dirs = Directory.GetFiles(filePathRichTextBox.Text.ToString(), searchPattern: "*."+fileExtensionComboBox.SelectedItem.ToString());
-                filesFoundRichTextBox.Text = dirs.Length.ToString();
-                foreach (string dir in dirs)
+            string ListPatch ="";
+            foreach (string folderPatch in S)
+            {
+                 ListPatch += folderPatch + "\n";
+                try
                 {
-                     allFilesListBox.Items.Add(dir.ToString());
+                    string[] F = SearchFile(folderPatch, "*."+fileExtensionComboBox.SelectedItem.ToString());
+                    foreach (string FF in F)
+                    {
+                        listBox1.Items.Add(FF.ToString());
+                        int count = F.Length;
+                      filesFoundRichTextBox.Text = count.ToString();
+                    }
                 }
+                catch
+                {
+                }
+            }
             
-           
         }
+      
 
         private void opentPathButton_Click(object sender, EventArgs e)
         {
             ChooseFolder();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listBox1.SelectedItem.ToString();
         }
     }
 }

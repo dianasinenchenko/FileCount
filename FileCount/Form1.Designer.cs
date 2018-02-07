@@ -35,15 +35,13 @@
             this.opentPathButton = new System.Windows.Forms.Button();
             this.findFileButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
-            this.allFilesListBox = new System.Windows.Forms.ListBox();
             this.filesFoundRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.resultPanel = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
-            this.resultPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -88,7 +86,7 @@
             // 
             // opentPathButton
             // 
-            this.opentPathButton.Location = new System.Drawing.Point(222, 234);
+            this.opentPathButton.Location = new System.Drawing.Point(230, 190);
             this.opentPathButton.Name = "opentPathButton";
             this.opentPathButton.Size = new System.Drawing.Size(75, 23);
             this.opentPathButton.TabIndex = 4;
@@ -98,7 +96,7 @@
             // 
             // findFileButton
             // 
-            this.findFileButton.Location = new System.Drawing.Point(314, 234);
+            this.findFileButton.Location = new System.Drawing.Point(322, 190);
             this.findFileButton.Name = "findFileButton";
             this.findFileButton.Size = new System.Drawing.Size(75, 23);
             this.findFileButton.TabIndex = 5;
@@ -108,29 +106,19 @@
             // 
             // stopButton
             // 
-            this.stopButton.Location = new System.Drawing.Point(404, 234);
+            this.stopButton.Location = new System.Drawing.Point(412, 190);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(75, 23);
             this.stopButton.TabIndex = 6;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = true;
             // 
-            // allFilesListBox
-            // 
-            this.allFilesListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.allFilesListBox.FormattingEnabled = true;
-            this.allFilesListBox.ItemHeight = 24;
-            this.allFilesListBox.Location = new System.Drawing.Point(19, 40);
-            this.allFilesListBox.Name = "allFilesListBox";
-            this.allFilesListBox.Size = new System.Drawing.Size(339, 220);
-            this.allFilesListBox.TabIndex = 7;
-            // 
             // filesFoundRichTextBox
             // 
             this.filesFoundRichTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.filesFoundRichTextBox.Location = new System.Drawing.Point(368, 40);
+            this.filesFoundRichTextBox.Location = new System.Drawing.Point(361, 121);
             this.filesFoundRichTextBox.Name = "filesFoundRichTextBox";
-            this.filesFoundRichTextBox.Size = new System.Drawing.Size(100, 36);
+            this.filesFoundRichTextBox.Size = new System.Drawing.Size(126, 36);
             this.filesFoundRichTextBox.TabIndex = 8;
             this.filesFoundRichTextBox.Text = "";
             // 
@@ -138,7 +126,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(364, 17);
+            this.label3.Location = new System.Drawing.Point(357, 94);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 24);
             this.label3.TabIndex = 9;
@@ -146,6 +134,8 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.label3);
+            this.mainPanel.Controls.Add(this.filesFoundRichTextBox);
             this.mainPanel.Controls.Add(this.filePathRichTextBox);
             this.mainPanel.Controls.Add(this.label1);
             this.mainPanel.Controls.Add(this.label2);
@@ -153,39 +143,40 @@
             this.mainPanel.Controls.Add(this.stopButton);
             this.mainPanel.Controls.Add(this.opentPathButton);
             this.mainPanel.Controls.Add(this.findFileButton);
-            this.mainPanel.Location = new System.Drawing.Point(12, 12);
+            this.mainPanel.Location = new System.Drawing.Point(3, 12);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(500, 260);
+            this.mainPanel.Size = new System.Drawing.Size(500, 223);
             this.mainPanel.TabIndex = 10;
             this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
-            // resultPanel
+            // listBox1
             // 
-            this.resultPanel.Controls.Add(this.label4);
-            this.resultPanel.Controls.Add(this.allFilesListBox);
-            this.resultPanel.Controls.Add(this.filesFoundRichTextBox);
-            this.resultPanel.Controls.Add(this.label3);
-            this.resultPanel.Location = new System.Drawing.Point(530, 12);
-            this.resultPanel.Name = "resultPanel";
-            this.resultPanel.Size = new System.Drawing.Size(499, 268);
-            this.resultPanel.TabIndex = 11;
+            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 24;
+            this.listBox1.Location = new System.Drawing.Point(509, 53);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(937, 172);
+            this.listBox1.TabIndex = 11;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(15, 13);
+            this.label4.Location = new System.Drawing.Point(505, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 24);
-            this.label4.TabIndex = 10;
+            this.label4.TabIndex = 12;
             this.label4.Text = " files list";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1035, 285);
-            this.Controls.Add(this.resultPanel);
+            this.ClientSize = new System.Drawing.Size(1452, 231);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.mainPanel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -195,9 +186,8 @@
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
-            this.resultPanel.ResumeLayout(false);
-            this.resultPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -210,13 +200,12 @@
         private System.Windows.Forms.Button opentPathButton;
         private System.Windows.Forms.Button findFileButton;
         private System.Windows.Forms.Button stopButton;
-        private System.Windows.Forms.ListBox allFilesListBox;
         private System.Windows.Forms.RichTextBox filesFoundRichTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.Panel resultPanel;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label4;
     }
 }
 
