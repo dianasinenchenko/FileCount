@@ -102,6 +102,7 @@
             this.findFileButton.TabIndex = 5;
             this.findFileButton.Text = "Find";
             this.findFileButton.UseVisualStyleBackColor = true;
+            this.findFileButton.Click += new System.EventHandler(this.findFileButton_Click);
             // 
             // stopButton
             // 

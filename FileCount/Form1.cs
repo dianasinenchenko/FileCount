@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,8 +40,22 @@ namespace FileCount
             fileExtensionComboBox.Items.Add("zip");
             fileExtensionComboBox.Items.Add("rar");
             fileExtensionComboBox.Items.Add("jpg");
-            fileExtensionComboBox.Items.Add("ppt");
+            fileExtensionComboBox.Items.Add("*");
           
+        }
+
+       
+        private void findFileButton_Click(object sender, EventArgs e)
+        {
+            
+                string[] dirs = Directory.GetFiles(filePathRichTextBox.Text.ToString(), searchPattern: "*."+fileExtensionComboBox.SelectedItem.ToString());
+                filesFoundRichTextBox.Text = dirs.Length.ToString();
+                foreach (string dir in dirs)
+                {
+                     allFilesListBox.Items.Add(dir.ToString());
+                }
+            
+           
         }
     }
 }
