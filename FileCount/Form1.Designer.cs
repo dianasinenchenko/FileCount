@@ -41,6 +41,7 @@
             this.mainPanel = new System.Windows.Forms.Panel();
             this.resultPanel = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.mainPanel.SuspendLayout();
             this.resultPanel.SuspendLayout();
             this.SuspendLayout();
@@ -93,6 +94,7 @@
             this.opentPathButton.TabIndex = 4;
             this.opentPathButton.Text = "Open";
             this.opentPathButton.UseVisualStyleBackColor = true;
+            this.opentPathButton.Click += new System.EventHandler(this.opentPathButton_Click);
             // 
             // findFileButton
             // 
@@ -214,6 +216,7 @@
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Panel resultPanel;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

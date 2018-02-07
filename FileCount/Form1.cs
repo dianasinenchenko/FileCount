@@ -44,7 +44,14 @@ namespace FileCount
           
         }
 
-       
+        public void ChooseFolder()
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                filePathRichTextBox.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
         private void findFileButton_Click(object sender, EventArgs e)
         {
             
@@ -56,6 +63,11 @@ namespace FileCount
                 }
             
            
+        }
+
+        private void opentPathButton_Click(object sender, EventArgs e)
+        {
+            ChooseFolder();
         }
     }
 }
