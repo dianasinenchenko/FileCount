@@ -59,8 +59,23 @@ namespace FileCount
         {
             try
             {
+                string checkDir = currentDirectory;
+                
                 foreach (string directory in Directory.GetDirectories(currentDirectory))
                 {
+                    if (checkDir.Equals(currentDirectory))
+                    {
+                        foreach (string file in Directory.GetFiles(currentDirectory, "*." + extension))
+                        {
+                            string currentExtension = Path.GetExtension(file);
+                            if (currentExtension != null && (currentExtension.Equals("." + extension)))
+                            {
+                                filesList.Add(file);
+                            }
+                            checkDir = "";
+                            break;
+                        }
+                    }
                     foreach (string file in Directory.GetFiles(directory, "*." + extension))
                     {
                         string currentExtension = Path.GetExtension(file);
