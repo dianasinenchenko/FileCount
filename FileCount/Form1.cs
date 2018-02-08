@@ -17,6 +17,7 @@ namespace FileCount
         public MainWindow()
         {
             InitializeComponent();
+          
            
         }
 
@@ -40,7 +41,8 @@ namespace FileCount
             fileExtensionComboBox.Items.Add("pdf");
             fileExtensionComboBox.Items.Add("zip");
             fileExtensionComboBox.Items.Add("rar");
-            fileExtensionComboBox.Items.Add("jpg");        
+            fileExtensionComboBox.Items.Add("jpg");
+
         }
 
         public void ChooseFolder()
@@ -50,49 +52,48 @@ namespace FileCount
                 filePathRichTextBox.Text = folderBrowserDialog1.SelectedPath;
             }
         }
-        
 
-        static string[] SearchDirectory(string patch)
+        private static List<string> filesList = new List<string>();
+
+        public static List<string> DirSech (string currentDirectory, string extension)
         {
-            string[] ResultSearch = Directory.GetDirectories(patch);           
-            return ResultSearch;            
-        }
-
-
-        static string[] SearchFile(string patch, string pattern)
-        {
-            string[] ResultSearch = Directory.GetFiles(patch, pattern, SearchOption.AllDirectories);           
-            return ResultSearch;
-        }
-
-
-        private void findFileButton_Click(object sender, EventArgs e)
-        {                 
-            string PatchProfile = filePathRichTextBox.Text.ToString();
-            string[] S = SearchDirectory(PatchProfile);
-            
-            string ListPatch ="";
-            foreach (string folderPatch in S)
+            try
             {
-                 ListPatch += folderPatch + "\n";
-                try
+                foreach (string directory in Directory.GetDirectories(currentDirectory))
                 {
-                    string[] F = SearchFile(folderPatch, "*."+fileExtensionComboBox.SelectedItem.ToString());
-                    foreach (string FF in F)
+                    foreach (string file in Directory.GetFiles(directory, "*." + extension))
                     {
-                        listBox1.Items.Add(FF.ToString());
-                        int count = F.Length;
-                      filesFoundRichTextBox.Text = count.ToString();
+                        string currentExtension = Path.GetExtension(file);
+                        if (currentExtension != null && (currentExtension.Equals("." + extension)))
+                        {
+                            filesList.Add(file);
+                        }
                     }
+
+                    DirSech(directory, extension);
                 }
-                catch
-                {
-                }
+
             }
-            
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return filesList;
+        }
+        
+ 
+        private void findFileButton_Click(object sender, EventArgs e)
+        {
+            DirSech(filePathRichTextBox.Text.ToString(), fileExtensionComboBox.SelectedItem.ToString());
+            foreach (string file in filesList)
+            {
+                listBox1.Items.Add(file.ToString());
+
+            }
+                       
         }
       
-
+    
         private void opentPathButton_Click(object sender, EventArgs e)
         {
             ChooseFolder();
