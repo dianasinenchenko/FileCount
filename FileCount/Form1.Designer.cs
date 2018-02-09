@@ -38,10 +38,10 @@
             this.filesFoundRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.clearLiasBoxButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.clearLiasBoxButton = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -151,6 +151,16 @@
             this.mainPanel.TabIndex = 10;
             this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
+            // clearLiasBoxButton
+            // 
+            this.clearLiasBoxButton.Location = new System.Drawing.Point(416, 190);
+            this.clearLiasBoxButton.Name = "clearLiasBoxButton";
+            this.clearLiasBoxButton.Size = new System.Drawing.Size(75, 23);
+            this.clearLiasBoxButton.TabIndex = 10;
+            this.clearLiasBoxButton.Text = "Clear";
+            this.clearLiasBoxButton.UseVisualStyleBackColor = true;
+            this.clearLiasBoxButton.Click += new System.EventHandler(this.clearLiasBoxButton_Click);
+            // 
             // listBox1
             // 
             this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -172,21 +182,11 @@
             this.label4.TabIndex = 12;
             this.label4.Text = " files list";
             // 
-            // clearLiasBoxButton
-            // 
-            this.clearLiasBoxButton.Location = new System.Drawing.Point(416, 190);
-            this.clearLiasBoxButton.Name = "clearLiasBoxButton";
-            this.clearLiasBoxButton.Size = new System.Drawing.Size(75, 23);
-            this.clearLiasBoxButton.TabIndex = 10;
-            this.clearLiasBoxButton.Text = "Clear";
-            this.clearLiasBoxButton.UseVisualStyleBackColor = true;
-            this.clearLiasBoxButton.Click += new System.EventHandler(this.clearLiasBoxButton_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1452, 231);
+            this.ClientSize = new System.Drawing.Size(1452, 232);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.mainPanel);

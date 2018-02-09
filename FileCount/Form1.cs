@@ -45,6 +45,9 @@ namespace FileCount
             fileExtensionComboBox.Items.Add("zip");
             fileExtensionComboBox.Items.Add("rar");
             fileExtensionComboBox.Items.Add("jpg");
+            fileExtensionComboBox.Items.Add("py");
+
+           
 
         }
 
@@ -85,6 +88,8 @@ namespace FileCount
                         if (currentExtension != null && (currentExtension.Equals("." + extension)))
                         {
                             filesList.Add(file);
+                           
+
                         }
                     }
 
@@ -100,21 +105,15 @@ namespace FileCount
         }
 
 
-        private void potok1() => filesFoundRichTextBox.Invoke((MethodInvoker)delegate
-        {
-            filesFoundRichTextBox.Text = filesList.Count.ToString();
-            Thread.Sleep(100);
-        });
-
-
         private void potok2() => listBox1.Invoke((MethodInvoker)delegate
         {
             DirSech(filePathRichTextBox.Text.ToString(), fileExtensionComboBox.SelectedItem.ToString());
             foreach (string file in filesList)
             {
-
-
                 listBox1.Items.Add(file.ToString());
+                
+                filesFoundRichTextBox.Text = filesList.Count.ToString();
+
             }
             Thread.Sleep(100);
 
@@ -123,10 +122,10 @@ namespace FileCount
 
         private void findFileButton_Click(object sender, EventArgs e)
         {
+            
             Thread foundThread = new Thread(potok2);
             foundThread.Start();
-            Thread countThread = new Thread(potok1);
-            countThread.Start();
+            filesFoundRichTextBox.Text = filesList.Count.ToString();
             
         }
 
@@ -147,6 +146,9 @@ namespace FileCount
             listBox1.Items.Clear();
             filePathRichTextBox.Text = "";
             filesFoundRichTextBox.Text = "";
+            filesList.Clear();
         }
+
+        
     }
 }
