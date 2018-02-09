@@ -41,6 +41,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.clearLiasBoxButton = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,7 +87,7 @@
             // 
             // opentPathButton
             // 
-            this.opentPathButton.Location = new System.Drawing.Point(230, 190);
+            this.opentPathButton.Location = new System.Drawing.Point(141, 190);
             this.opentPathButton.Name = "opentPathButton";
             this.opentPathButton.Size = new System.Drawing.Size(75, 23);
             this.opentPathButton.TabIndex = 4;
@@ -96,7 +97,7 @@
             // 
             // findFileButton
             // 
-            this.findFileButton.Location = new System.Drawing.Point(322, 190);
+            this.findFileButton.Location = new System.Drawing.Point(233, 190);
             this.findFileButton.Name = "findFileButton";
             this.findFileButton.Size = new System.Drawing.Size(75, 23);
             this.findFileButton.TabIndex = 5;
@@ -106,7 +107,7 @@
             // 
             // stopButton
             // 
-            this.stopButton.Location = new System.Drawing.Point(412, 190);
+            this.stopButton.Location = new System.Drawing.Point(323, 190);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(75, 23);
             this.stopButton.TabIndex = 6;
@@ -134,6 +135,7 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.clearLiasBoxButton);
             this.mainPanel.Controls.Add(this.label3);
             this.mainPanel.Controls.Add(this.filesFoundRichTextBox);
             this.mainPanel.Controls.Add(this.filePathRichTextBox);
@@ -169,6 +171,16 @@
             this.label4.Size = new System.Drawing.Size(73, 24);
             this.label4.TabIndex = 12;
             this.label4.Text = " files list";
+            // 
+            // clearLiasBoxButton
+            // 
+            this.clearLiasBoxButton.Location = new System.Drawing.Point(416, 190);
+            this.clearLiasBoxButton.Name = "clearLiasBoxButton";
+            this.clearLiasBoxButton.Size = new System.Drawing.Size(75, 23);
+            this.clearLiasBoxButton.TabIndex = 10;
+            this.clearLiasBoxButton.Text = "Clear";
+            this.clearLiasBoxButton.UseVisualStyleBackColor = true;
+            this.clearLiasBoxButton.Click += new System.EventHandler(this.clearLiasBoxButton_Click);
             // 
             // MainWindow
             // 
@@ -206,6 +218,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button clearLiasBoxButton;
     }
 }
 

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,11 +15,13 @@ namespace FileCount
 {
     public partial class MainWindow : Form
     {
+
+
+
         public MainWindow()
         {
             InitializeComponent();
           
-           
         }
 
         private void fileExtensionComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,7 +58,7 @@ namespace FileCount
 
         private static List<string> filesList = new List<string>();
 
-        public static List<string> DirSech (string currentDirectory, string extension)
+        private static List<string> DirSech (string currentDirectory, string extension)
         {
             try
             {
@@ -95,20 +98,39 @@ namespace FileCount
             }
             return filesList;
         }
-        
- 
-        private void findFileButton_Click(object sender, EventArgs e)
+
+
+        private void potok1() => filesFoundRichTextBox.Invoke((MethodInvoker)delegate
+        {
+            filesFoundRichTextBox.Text = filesList.Count.ToString();
+            Thread.Sleep(100);
+        });
+
+
+        private void potok2() => listBox1.Invoke((MethodInvoker)delegate
         {
             DirSech(filePathRichTextBox.Text.ToString(), fileExtensionComboBox.SelectedItem.ToString());
             foreach (string file in filesList)
             {
-                listBox1.Items.Add(file.ToString());
 
+
+                listBox1.Items.Add(file.ToString());
             }
-                       
+            Thread.Sleep(100);
+
+        });
+
+
+        private void findFileButton_Click(object sender, EventArgs e)
+        {
+            Thread foundThread = new Thread(potok2);
+            foundThread.Start();
+            Thread countThread = new Thread(potok1);
+            countThread.Start();
+            
         }
+
       
-    
         private void opentPathButton_Click(object sender, EventArgs e)
         {
             ChooseFolder();
@@ -117,6 +139,14 @@ namespace FileCount
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBox1.SelectedItem.ToString();
+        }
+
+
+        private void clearLiasBoxButton_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            filePathRichTextBox.Text = "";
+            filesFoundRichTextBox.Text = "";
         }
     }
 }
