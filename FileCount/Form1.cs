@@ -15,14 +15,11 @@ namespace FileCount
 {
     public partial class MainWindow : Form
     {
-
-
-
         public MainWindow()
         {
-            InitializeComponent();
-          
+            InitializeComponent();          
         }
+
 
         private void fileExtensionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -30,10 +27,12 @@ namespace FileCount
             string selectedExtensionState = fileExtensionComboBox.SelectedItem.ToString();
         }
 
+
         private void mainPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }
+
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
@@ -46,10 +45,8 @@ namespace FileCount
             fileExtensionComboBox.Items.Add("rar");
             fileExtensionComboBox.Items.Add("jpg");
             fileExtensionComboBox.Items.Add("py");
-
-           
-
         }
+
 
         public void ChooseFolder()
         {
@@ -59,7 +56,9 @@ namespace FileCount
             }
         }
 
+
         private static List<string> filesList = new List<string>();
+
 
         private static List<string> DirSech (string currentDirectory, string extension)
         {
@@ -104,29 +103,53 @@ namespace FileCount
             return filesList;
         }
 
+        public void Run(bool ternOnOf)
+        {
+            Thread foundThread = new Thread(potok2);            
+            Thread countThread = new Thread(potok1);
+            
+            if (ternOnOf)
+            {
+                foundThread.Priority = ThreadPriority.Highest;
+                foundThread.Start();
+                countThread.Priority = ThreadPriority.Normal;
+                countThread.Start();
+            }
+            else
+            {                
+                foundThread.Abort();
+                countThread.Abort();
+                listBox1.Items.Add("stopped");
+            }
+        }
 
+        
         private void potok2() => listBox1.Invoke((MethodInvoker)delegate
         {
             DirSech(filePathRichTextBox.Text.ToString(), fileExtensionComboBox.SelectedItem.ToString());
+            
             foreach (string file in filesList)
             {
-                listBox1.Items.Add(file.ToString());
                 
-                filesFoundRichTextBox.Text = filesList.Count.ToString();
+                listBox1.Items.Add(file.ToString());
+                listBox1.EndUpdate();                
+            }         
 
-            }
-            Thread.Sleep(100);
+        });
 
+
+
+        private void potok1() => filesFoundRichTextBox.Invoke((MethodInvoker)delegate
+        {
+            filesFoundRichTextBox.Text = filesList.Count.ToString();
+         
         });
 
 
         private void findFileButton_Click(object sender, EventArgs e)
         {
-            
-            Thread foundThread = new Thread(potok2);
-            foundThread.Start();
-            filesFoundRichTextBox.Text = filesList.Count.ToString();
-            
+            Run(true);
+          
         }
 
       
@@ -134,6 +157,7 @@ namespace FileCount
         {
             ChooseFolder();
         }
+
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -149,6 +173,9 @@ namespace FileCount
             filesList.Clear();
         }
 
-        
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            Run(false);
+        }
     }
 }
