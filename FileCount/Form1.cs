@@ -68,28 +68,51 @@ namespace FileCount
                 
                 foreach (string directory in Directory.GetDirectories(currentDirectory))
                 {
-                    if (checkDir.Equals(currentDirectory))
+
+                    DirectoryInfo directoryInfo = new DirectoryInfo(directory);
+                    if ((directoryInfo.Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)
+                    {                     
+                       
+                    }
+                    else
                     {
-                        foreach (string file in Directory.GetFiles(currentDirectory, "*." + extension))
+                        if (checkDir.Equals(currentDirectory))
+                        {
+                            foreach (string file in Directory.GetFiles(currentDirectory, "*." + extension))
+                            {
+                                string currentExtension = Path.GetExtension(file);
+
+
+                                if (currentExtension != null && (currentExtension.Equals("." + extension)))
+                                {
+                                    filesList.Add(file);
+                                }
+                                checkDir = "";
+                                break;
+                            }
+                        }
+                    }
+
+
+                    DirectoryInfo directoryInfo1 = new DirectoryInfo(directory);
+                    if ((directoryInfo1.Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)
+                    {
+                       
+                    }
+                    else
+                    {
+                        foreach (string file in Directory.GetFiles(directory, "*." + extension))
                         {
                             string currentExtension = Path.GetExtension(file);
+
+
                             if (currentExtension != null && (currentExtension.Equals("." + extension)))
                             {
                                 filesList.Add(file);
-                            }
-                            checkDir = "";
-                            break;
-                        }
-                    }
-                    foreach (string file in Directory.GetFiles(directory, "*." + extension))
-                    {
-                        string currentExtension = Path.GetExtension(file);
-                        if (currentExtension != null && (currentExtension.Equals("." + extension)))
-                        {
-                            filesList.Add(file);
-                           
 
+                            }
                         }
+                       
                     }
 
                     DirSech(directory, extension);
