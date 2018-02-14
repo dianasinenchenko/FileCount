@@ -149,14 +149,23 @@ namespace FileCount
         
         private void potok2() => listBox1.Invoke((MethodInvoker)delegate
         {
-            DirSech(filePathRichTextBox.Text.ToString(), fileExtensionComboBox.SelectedItem.ToString());
-            
-            foreach (string file in filesList)
+             try
             {
-                
-                listBox1.Items.Add(file.ToString());
-                listBox1.EndUpdate();                
-            }         
+                DirSech(filePathRichTextBox.Text.ToString(), fileExtensionComboBox.SelectedItem.ToString());
+
+                foreach (string file in filesList)
+                {
+
+                    listBox1.Items.Add(file.ToString());
+                    listBox1.EndUpdate();
+
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Wrong path");
+            }
+             
 
         });
 
