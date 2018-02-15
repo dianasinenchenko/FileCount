@@ -157,7 +157,7 @@ namespace FileCount
                 {
 
                     listBox1.Items.Add(file.ToString());
-                    listBox1.EndUpdate();
+                    listBox1.Refresh();
 
                 }
             }
